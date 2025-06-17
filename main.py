@@ -45,5 +45,7 @@ def main(linkedin_username: str):
 
 
 if __name__ == "__main__":
-    linkedin_username: str = "maheralkhadra"
+    linkedin_username: str = input("Enter LinkedIn username: ").strip()
+    if not linkedin_username:
+        raise ValueError("LinkedIn username cannot be empty.")
     main(linkedin_username=linkedin_username)
