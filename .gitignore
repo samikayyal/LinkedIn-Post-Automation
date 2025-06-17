@@ -1,0 +1,7 @@
+.env
+.venv
+
+posts_cache/
+
+notes.txt
+test.ipynb

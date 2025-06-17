@@ -1,0 +1,10 @@
+google-genai
+python-dotenv
+requests
+fake-useragent
+selenium
+playwright
+apify-client
+ipykernel
+# For Playwright, you may need to install the browsers separately
+# playwright install
