@@ -3,9 +3,10 @@ import os
 import dotenv
 
 from apify import get_posts
+from genai_posts import get_generated_content
 
 
-def main():
+def main(linkedin_username: str):
     dotenv.load_dotenv()
 
     GEMINI_API_KEY: str | None = os.getenv("GEMINI_API_KEY")
@@ -16,7 +17,6 @@ def main():
             "GEMINI_API_KEY and APIFY_API_KEY must be set in the environment variables."
         )
 
-    linkedin_username: str = input("Enter LinkedIn username: ")
     posts: list[dict] = get_posts(
         linkedin_username=linkedin_username,
         limit=10,
@@ -24,15 +24,13 @@ def main():
         load_cache=True,
     )
 
+    generated_content = get_generated_content(
+        api_key=GEMINI_API_KEY, model="gemini-2.0-flash", posts=posts
+    )
 
-"""
-gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+    return generated_content
 
-response = gemini_client.models.generate_content(
-    model="gemini-2.0-flash",
-    contents="Hi there! What can you do?",
-)
 
-with open("response.md", "w") as f:
-    f.write(response.text)
-"""
+if __name__ == "__main__":
+    linkedin_username: str = input("Enter LinkedIn username: ")
+    main(linkedin_username=linkedin_username)

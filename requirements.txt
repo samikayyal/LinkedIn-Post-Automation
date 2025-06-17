@@ -5,6 +5,10 @@ fake-useragent
 selenium
 playwright
 apify-client
+pillow
+
+# Additional dependencies for Jupyter Notebook and IPython kernel
 ipykernel
+
 # For Playwright, you may need to install the browsers separately
 # playwright install
