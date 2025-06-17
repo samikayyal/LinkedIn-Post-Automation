@@ -1,0 +1,101 @@
+/* Main container styling */
+.main .block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    width: 60% !important;
+    min-width: 60% !important;
+    max-width: 60% !important;
+    margin: 0 auto !important;
+}
+
+/* Custom header styling */
+.header-container {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header-title {
+    color: white !important;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header-subtitle {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    font-weight: 300;
+}
+
+/* Expander styling */
+.streamlit-expanderHeader {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    border-radius: 10px !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+.streamlit-expanderContent {
+    background: #f8f9fa;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #dee2e6;
+    border-top: none;
+    padding: 1rem;
+}
+
+/* Button styling inside a form */
+.stForm .stButton>button {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.stForm .stButton>button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Image recommendation styling */
+.image-recommendation {
+    background: linear-gradient(90deg, #fff3cd 0%, #fde6e0 100%);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    border-left: 4px solid #fdcb6e;
+    color: #333;
+}
+
+/* Metadata section styling */
+.metadata-section {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+    border: 1px solid #e9ecef;
+}
+
+/* Text input styling */
+.stTextInput>div>div>input {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    padding: 0.75rem;
+}
+
+.stTextInput>div>div>input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}

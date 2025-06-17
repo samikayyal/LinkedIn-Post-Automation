@@ -41,6 +41,8 @@ def main(linkedin_username: str):
             else:
                 f.write("No image recommendation.\n\n")
 
+    print("Generated content saved to response.md")
+
     return generated_content, response
 
 

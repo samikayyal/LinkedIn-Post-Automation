@@ -1,11 +1,12 @@
 google-genai
 python-dotenv
 requests
-fake-useragent
-selenium
-playwright
+# fake-useragent
+# selenium
+# playwright
 apify-client
 pillow
+streamlit
 
 # Additional dependencies for Jupyter Notebook and IPython kernel
 ipykernel

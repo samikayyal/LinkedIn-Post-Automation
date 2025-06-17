@@ -46,7 +46,9 @@ def get_posts(
         cache_file = f"posts_cache/{linkedin_username}_posts.json"
         if os.path.exists(cache_file):
             with open(cache_file, "r") as f:
-                return json.load(f)
+                data = json.load(f)
+                if len(data) >= limit:
+                    return data
 
     print("Fetching posts from Apify...")
     client = ApifyClient(api_key)
