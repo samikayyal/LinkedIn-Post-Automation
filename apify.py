@@ -41,12 +41,14 @@ def get_posts(
     linkedin_username: str, limit: int, api_key: str, load_cache: bool = True
 ) -> list[dict]:
     if load_cache:
+        print("Loading posts from cache...")
         # Check if the posts are already cached
         cache_file = f"posts_cache/{linkedin_username}_posts.json"
         if os.path.exists(cache_file):
             with open(cache_file, "r") as f:
                 return json.load(f)
 
+    print("Fetching posts from Apify...")
     client = ApifyClient(api_key)
 
     # Set up the run input (parameters for the actor)
