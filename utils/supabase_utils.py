@@ -17,20 +17,7 @@ def get_user_posts(linkedin_username: str, limit: int) -> list[dict]:
     Returns:
         list[dict]: A list of posts for the user.
     """
-    # supabase_client = st.session_state.get("supabase_client")
-    dotenv.load_dotenv()
-    url: str | None = os.getenv("SUPABASE_URL")
-    key: str | None = os.getenv("SUPABASE_KEY")
-    if not url or not key:
-        print(
-            "⚠️ **Missing Supabase URL or Key!** Please set `SUPABASE_URL` and `SUPABASE_KEY` in a `.env` file."
-        )
-        st.stop()
-        raise ValueError("Supabase URL or Key is not set in the environment variables.")
-    supabase_client: Client = create_client(
-        supabase_url=url,
-        supabase_key=key,
-    )
+    supabase_client: Client | None = st.session_state.get("supabase_client")
     if not supabase_client or not isinstance(supabase_client, Client):
         raise ValueError(
             "Supabase client is not initialized in session state. Or not a valid Client instance."
@@ -58,20 +45,7 @@ def write_user_posts(linkedin_username: str, posts: list[dict]) -> None:
     Returns:
         None
     """
-    # supabase_client = st.session_state.get("supabase_client")
-    dotenv.load_dotenv()
-    url: str | None = os.getenv("SUPABASE_URL")
-    key: str | None = os.getenv("SUPABASE_KEY")
-    if not url or not key:
-        print(
-            "⚠️ **Missing Supabase URL or Key!** Please set `SUPABASE_URL` and `SUPABASE_KEY` in a `.env` file."
-        )
-        st.stop()
-        return
-    supabase_client: Client = create_client(
-        supabase_url=url,
-        supabase_key=key,
-    )
+    supabase_client: Client | None = st.session_state.get("supabase_client")
     if not supabase_client or not isinstance(supabase_client, Client):
         raise ValueError(
             "Supabase client is not initialized in session state. Or not a valid Client instance."
