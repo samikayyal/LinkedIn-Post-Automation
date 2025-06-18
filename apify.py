@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 
@@ -5,6 +6,32 @@ import requests
 from apify_client import ApifyClient
 
 api_key: str = "apify_api_80oNCjYGXp9VjbVHpdywxAlMGLClkh2NUL3b"
+
+
+def hash_username(username: str) -> str:
+    """
+    Fetches the user hash for a LinkedIn profile.
+
+    Args:
+        username (str): The LinkedIn username or profile URL.
+
+    Returns:
+        str | None: The user hash if found, otherwise None.
+    """
+
+    # Convert the username to bytes.
+    username_bytes = username.encode("utf-8")
+
+    # Create a sha256 hash object.
+    sha256_hash = hashlib.sha256()
+
+    # Update the hash object with the bytes of the username.
+    sha256_hash.update(username_bytes)
+
+    # Get the hexadecimal representation of the hash.
+    hex_digest = sha256_hash.hexdigest()
+
+    return hex_digest
 
 
 def get_image_from_post(post: dict) -> str | None:
@@ -43,7 +70,7 @@ def get_posts(
     if load_cache:
         print("Loading posts from cache...")
         # Check if the posts are already cached
-        cache_file = f"posts_cache/{linkedin_username}_posts.json"
+        cache_file = f"posts_cache/{hash_username(linkedin_username)}_posts.json"
         if os.path.exists(cache_file):
             with open(cache_file, "r") as f:
                 data = json.load(f)
@@ -79,7 +106,7 @@ def get_posts(
     # write the posts to a file
     os.makedirs("posts_cache", exist_ok=True)
 
-    with open(f"posts_cache/{linkedin_username}_posts.json", "w") as f:
+    with open(f"posts_cache/{hash_username(linkedin_username)}_posts.json", "w") as f:
         json.dump(posts, f, indent=4)
 
     return posts
