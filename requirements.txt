@@ -1,15 +1,16 @@
 google-genai
 python-dotenv
 requests
+streamlit
+apify-client
+supabase
 # fake-useragent
 # selenium
 # playwright
-apify-client
-pillow
-streamlit
+# pillow
 
 # Additional dependencies for Jupyter Notebook and IPython kernel
-ipykernel
+# ipykernel
 
 # For Playwright, you may need to install the browsers separately
 # playwright install

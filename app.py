@@ -1,10 +1,11 @@
 import os
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import dotenv
 import streamlit as st
+from supabase.client import Client, create_client
 
-from apify import get_posts
+from apify_posts import get_posts
 from genai_posts import get_generated_content
 
 # --- Constants ---
@@ -75,7 +76,7 @@ def render_results():
         return
 
     content = st.session_state.generated_content
-    response = st.session_state.api_response
+    response = st.session_state.api_response  # noqa: F841
 
     if content:
         st.markdown("---")
@@ -132,7 +133,7 @@ def handle_generation_process():
         posts: List[Dict] = get_posts(
             linkedin_username=st.session_state.username,
             limit=POST_FETCH_LIMIT,
-            api_key=APIFY_API_KEY,  # type: ignore
+            apify_key=APIFY_API_KEY,  # type: ignore
         )
 
         if not posts:
@@ -168,6 +169,23 @@ def handle_generation_process():
 
 
 def main():
+    # ============= Supabase initialization =============
+    dotenv.load_dotenv()
+    url: str | None = os.getenv("SUPABASE_URL")
+    key: str | None = os.getenv("SUPABASE_KEY")
+    if not url or not key:
+        print(
+            "⚠️ **Missing Supabase URL or Key!** Please set `SUPABASE_URL` and `SUPABASE_KEY` in a `.env` file."
+        )
+        st.stop()
+        return
+    is_supabase_cache: bool = True
+    supabase_client: Client = create_client(
+        supabase_url=url,
+        supabase_key=key,
+    )
+
+    # ============= Streamlit app initialization =============
     st.set_page_config(**PAGE_CONFIG)
     try:
         with open("style.css") as f:
@@ -181,6 +199,8 @@ def main():
         "api_response": None,
         "error": None,
         "username": "",
+        "is_supabase_cache": is_supabase_cache,
+        "supabase_client": supabase_client,
     }
     for key, value in defaults.items():
         if key not in st.session_state:

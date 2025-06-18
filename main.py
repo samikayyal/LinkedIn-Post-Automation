@@ -2,7 +2,7 @@ import os
 
 import dotenv
 
-from apify import get_posts
+from apify_posts import get_posts
 from genai_posts import get_generated_content
 
 
@@ -20,7 +20,7 @@ def main(linkedin_username: str):
     posts: list[dict] = get_posts(
         linkedin_username=linkedin_username,
         limit=10,
-        api_key=APIFY_API_KEY,
+        apify_key=APIFY_API_KEY,
         load_cache=True,
     )
 

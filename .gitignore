@@ -3,6 +3,7 @@
 __pycache__/
 
 images/
+posts_cache/
 
 notes.txt
 test.ipynb
