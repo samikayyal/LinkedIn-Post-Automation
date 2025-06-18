@@ -27,7 +27,7 @@ def get_generated_content(
     2.  **Generate Posts:** Create {num_posts} variations based on the "Core Content". Each post must be concise, engaging, and professional.
     3.  **Multi-language:** If the examples or content use multiple languages, generate posts in each of those languages.
     4.  **Image Prompts:** If a post would be enhanced by an image, provide a detailed, descriptive prompt for an image generation model (e.g., "A photorealistic image of a diverse team collaborating around a futuristic whiteboard..."). If no image is needed, leave it null.
-    5.  **Output Format:** Your final output MUST be a valid JSON array of objects, strictly adhering to the provided schema.
+    5.  **Output Format:** Your final output MUST be a valid JSON array of objects, strictly adhering to the provided schema. In the post content, make sure to properly format correctly, including any necessary new lines, bullet points, emojis, etc.. .
 
     ---
     **Core Content to Write About:**
