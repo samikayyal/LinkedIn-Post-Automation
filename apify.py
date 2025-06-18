@@ -2,7 +2,6 @@ import hashlib
 import json
 import os
 
-import requests
 from apify_client import ApifyClient
 
 api_key: str = "apify_api_80oNCjYGXp9VjbVHpdywxAlMGLClkh2NUL3b"
@@ -32,36 +31,6 @@ def hash_username(username: str) -> str:
     hex_digest = sha256_hash.hexdigest()
 
     return hex_digest
-
-
-def get_image_from_post(post: dict) -> str | None:
-    """
-    Extracts the image URL from a LinkedIn post if it exists and saves it to a file.
-
-    Args:
-        post (dict): The LinkedIn post data containing media information.
-    Returns:
-        str | None: The path to the saved image file if an image exists, otherwise None.
-    """
-    image_url: str | None = None
-
-    if (
-        "media" in post
-        and post["media"]["type"] == "image"
-        and "images" in post["media"]
-        and len(post["media"]["images"]) > 0
-    ):
-        image_url: str | None = post["media"]["images"][0].get("url", None)
-
-    if image_url:
-        os.makedirs("images", exist_ok=True)
-        with open(f"images/{post['urn']}.jpg", "wb") as f:
-            response = requests.get(image_url)
-            f.write(response.content)
-    else:
-        print(f"No image found for post {post['urn']}")
-
-    return f"images/{post['urn']}.jpg" if image_url else None
 
 
 def get_posts(
@@ -97,11 +66,6 @@ def get_posts(
     posts: list[dict] = []
     for item in client.dataset(run["defaultDatasetId"]).iterate_items():
         posts.append(item)
-
-    # get the image for each post (if exists)
-    for post in posts:
-        image_path: str | None = get_image_from_post(post)
-        post["image_path"] = image_path if image_path else None
 
     # write the posts to a file
     os.makedirs("posts_cache", exist_ok=True)
